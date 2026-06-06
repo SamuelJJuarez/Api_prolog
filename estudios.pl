@@ -1,1 +1,0 @@
-estudio(game_freak).

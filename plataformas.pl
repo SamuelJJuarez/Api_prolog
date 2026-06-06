@@ -1,1 +1,0 @@
-plataforma(nintendo_switch).

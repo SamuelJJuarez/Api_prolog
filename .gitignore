@@ -12,3 +12,6 @@ pip-delete-this-directory.txt
 .toast
 .build
 .venv
+
+# Archivos Prolog
+*.pl

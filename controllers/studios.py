@@ -33,12 +33,38 @@ def create_studio():
     
     #obtener datos
     data = request.get_json()
+    name = data.get("name")
+    state = data.get("state", "activo")
     
+    if not name:
+        return jsonify({"detail":"faltan campos obligatorios"}), 400
+        
     #crear registro
-    repo.create_studio(**data)
+    repo.create_studio(name, state)
     
     #mensaje de exito
     return jsonify({"msg":"el estudio fue creado"}), 200
+
+@studios_router.put("/state")
+def update_studio_state():
+    #validar json
+    if not request.is_json:
+        return jsonify({"detail":"sin contenido a procesar"}), 422
+        
+    #obtener datos
+    data = request.get_json()
+    name = data.get("name")
+    state = data.get("state")
+    
+    if not name or not state:
+        return jsonify({"detail":"faltan campos obligatorios"}), 400
+        
+    #actualizar registro
+    res = repo.update_studio_state(name, state)
+    if not res:
+        return jsonify({"detail":"el estudio no existe"}), 404
+        
+    return jsonify({"msg":"estado de estudio actualizado"}), 200
 
 @studios_router.post("/asign")
 def asign_game():
