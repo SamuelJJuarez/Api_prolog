@@ -1,0 +1,1 @@
+estudio(game_freak).
